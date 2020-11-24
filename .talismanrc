@@ -1,0 +1,11 @@
+# spell-checker: ignore fileignoreconfig bigip
+---
+fileignoreconfig:
+- filename: templates/do.json
+  checksum: 51945854883f9a0507cff0476aefea1b35f0123e112e0a4c2e134290cff6d8a1
+- filename: bigip.tf
+  checksum: 6051509fc9b74980066d911b47dc6fdf6deed17256623bbb60bdc5b60d0a9ef0
+- filename: variables.tf
+  checksum: bc6f59bb8f3ed215a4cbcca727ed9f929bd201f6a4eb1923b903a567689f8410
+- filename: main.tf
+  checksum: 4be54819c8f5f246a499cd0a105b93509f154356c2929e3e665f4d7adc592627

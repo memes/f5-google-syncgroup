@@ -1,0 +1,32 @@
+# Pre-commit configuration
+# spell-checker: ignore repos yamllint talismanrc scanwithrc
+---
+repos:
+  - repo: https://github.com/adrienverge/yamllint
+    rev: v1.25.0
+    hooks:
+      - id: yamllint
+        files: \.(yml|yaml|talismanrc)$
+        types: [file, yaml]
+        entry: yamllint --strict
+  - repo: https://github.com/antonbabenko/pre-commit-terraform
+    rev: v1.45.0
+    hooks:
+      - id: terraform_fmt
+      - id: terraform_docs
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v3.3.0
+    hooks:
+      - id: check-executables-have-shebangs
+      - id: check-merge-conflict
+      - id: check-xml
+      - id: check-yaml
+        args: [--allow-multiple-documents]
+      - id: detect-private-key
+      - id: end-of-file-fixer
+      - id: sort-simple-yaml
+      - id: trailing-whitespace
+  - repo: https://github.com/thoughtworks/talisman
+    rev: scanwithrc
+    hooks:
+      - id: talisman-commit

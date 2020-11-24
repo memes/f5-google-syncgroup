@@ -1,0 +1,60 @@
+{
+    "$schema": "https://raw.githubusercontent.com/F5Networks/f5-declarative-onboarding/v1.15.0/src/schema/1.15.0/base.schema.json",
+    "schemaVersion": "1.15.0",
+    "class": "Device",
+    "async": true,
+    "label": "auto-onboard for SyncGroup instance",
+    "Common":{
+      "class": "Tenant",
+      "system": {
+        "class": "System",
+  %{ if length(hostname) > 0 ~}
+        "hostname": "${format("%.64s", hostname)}",
+  %{ endif ~}
+        "autoPhonehome": ${jsonencode(allow_phone_home)}
+      },
+      "dns": {
+        "class": "DNS",
+        "nameServers": ${jsonencode(dns_servers)},
+        "search": ${jsonencode(search_domains)}
+      },
+      "ntp": {
+        "class": "NTP",
+        "servers": ${jsonencode(ntp_servers)},
+        "timezone": "${timezone}"
+      },
+      "provision": {
+  %{ for k,v in modules ~}
+        "${k}": "${v}",
+  %{ endfor ~}
+        "class": "Provision"
+      },
+      "configSync": {
+        "class": "ConfigSync",
+        "configsyncIp": ${jsonencode(sync_address)}
+      },
+      "failoverAddress": {
+        "class": "FailoverUnicast",
+        "address": ${jsonencode(sync_address)}
+      },
+      "syncOnlyGroup": {
+        "class": "DeviceGroup",
+        "type": "sync-only",
+        "members": ${jsonencode(sync_group_members)},
+        "owner": "/Common/syncOnlyGroup/members/0",
+        "autoSync": true,
+        "saveOnAutoSync": true,
+        "networkFailover": false,
+        "fullLoadOnSync": false,
+        "asmSync": false
+      },
+      "trust": {
+        "class": "DeviceTrust",
+        "localUsername": "admin",
+        "localPassword": env.ADMIN_PASSWORD,
+        "remoteHost": "/Common/syncOnlyGroup/members/0",
+        "remoteUsername": "admin",
+        "remotePassword": env.ADMIN_PASSWORD
+      }
+    }
+  }
