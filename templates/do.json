@@ -41,7 +41,7 @@
         "class": "DeviceGroup",
         "type": "sync-only",
         "members": ${jsonencode(sync_group_members)},
-        "owner": "/Common/syncOnlyGroup/members/0",
+        "owner": "/Common/syncOnlyGroup/members/${sync_member}",
         "autoSync": true,
         "saveOnAutoSync": true,
         "networkFailover": false,

@@ -9,3 +9,5 @@ fileignoreconfig:
   checksum: bc6f59bb8f3ed215a4cbcca727ed9f929bd201f6a4eb1923b903a567689f8410
 - filename: main.tf
   checksum: 4be54819c8f5f246a499cd0a105b93509f154356c2929e3e665f4d7adc592627
+- filename: README.md
+  checksum: 75c47a199d418bbffecef75dca08aa3d1a66bcde4cf416c658f3a328a548d053

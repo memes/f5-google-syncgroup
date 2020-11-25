@@ -46,9 +46,10 @@ locals {
       timezone         = "UTC",
       modules = {
         ltm = "nominal"
-      }
-      sync_address       = element(module.internal_private_ip.addresses, i)
-      sync_group_members = module.internal_private_ip.addresses
+      },
+      sync_address       = element(module.internal_private_ip.addresses, i),
+      sync_group_members = module.internal_private_ip.addresses,
+      sync_member        = max(0, tonumber(i) - 1)
     }
   )]
   # All instances can share the same AS3 declaration
